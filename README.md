@@ -9,3 +9,5 @@ projeto 1: suficiente+
 projeto 2: bom-
 
 projeto 3: bom
+
+Total (quantitativo): 11 (em 14)
