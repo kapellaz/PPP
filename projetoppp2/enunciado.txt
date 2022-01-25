@@ -1,0 +1,56 @@
+Segundo trabalho de Princípios de Programação Procedimental
+                Ano letivo 2020/2021
+
+Os trabalhos são individuais. O programa entregue por cada aluno tem de ser da sua estrita autoria. Ninguém pode apresentar como seu trabalho que não tenha sido feito por si. Não há qualquer tolerância para a fraude.
+O enunciado fornecido não é necessariamente completo; o comportamento do programa nas situações não previstas no enunciado deve ser escolhido por cada estudante, de entre as várias hipóteses razoáveis. As escolhas feitas devem ser referidas explicitamente: não é aceitável ter de ir ver qual o comportamento do programa nesses casos para saber qual a escolha feita. No cabeçalho do programa principal devem estar listadas as escolhas feitas.
+O CLion, com a opção add_compile_options(-Wall -Wextra), não deve gerar qualquer aviso sobre o código fonte, exceto os que não possam ser resolvidos com a matéria lecionada até ao final da semana 8. Para fazer esta verificação o CLion deve ter o clang-tidy ativado na configuração standard, ou o clang-tidy deve ser executado na linha de comandos "clang-tidy ficheiro.c" (ficheiro.c é o ficheiro que está a ser verificado) tendo previamente colocado o ficheiro .clang-tidy nessa diretoria. O ficheiro .clang-tidy pode ser obtido de https://git.dei.uc.pt/snippets/31
+O interface da estrutura de dados deve ser bem definido, para haver abstração - o programa principal não pode manipular diretamente as variáveis de suporte à estrutura de dados, só o módulo que implementa a estrutura de dados.
+O programa deve ser subdividido em quatro ficheiros fonte:
+- O programa principal (a função main)
+- As funções auxiliares do programa principal (só devem ter visibilidade para todo o programa as funções de que a função main precisa).
+- As funções que concretizam a estrutura de dados (só devem ter visibilidade para todo o programa as funções que constituem o interface da estrutura de dados)
+- Um header com a declaração do interface com a estrutura de dados.
+Só estes quatro ficheiros fonte devem ser submetidos como resultado do trabalho, acompanhados do ficheiro "texto.txt", referido a seguir.
+
+Inicialmente é necessário arranjar um texto (cada estudante o seu texto) com aproximadamente três mil carateres, em português, com acentos e cedilhas, copiado de qualquer lado (p.ex, um texto jornalístico ou literário) e colocá-lo num ficheiro chamado "texto.txt", com codificação UTF-8. O ficheiro deve estar na diretoria onde o programa vai ser executado, para ser lido com a função fornecida no final deste enunciado.
+Lido o texto, começa-se por separar as palavras e inserir ordenadamente numa lista duplamente ligada circular.
+A inserção é feita através de uma função "colocar_ordenado", a incluir no interface da estrutura de dados.
+Na estrutura de dados não devem ser inseridas repetições, mas sim contadas ocorrências. Isto é, para cada grupo de palavras que, de acordo com o critério de ordenação, fique na mesma posição da ordenação, só a que surgir primeiro deve ser inserida, levando as restantes ao incremento do contador de ocorrências dessa primeira palavra do grupo.
+O critério de ordenação é o número crescente de letras da palavra e, secundariamente, a ordem alfabética inversa.
+As palavras são compostas apenas por letras.
+As letras que diferem nos acentos, cedilhas, maiúsculas e minúsculas são consideradas letras distintas.
+Depois de processar todo o texto deve retirar as palavras da lista pela ordem pela qual ficaram ordenadas e mostrar no ecrã, uma palavra por linha, com espaços antes, de forma que a última letra esteja a uma distância do início da linha proporcional ao número de ocorrências. A palavra com maior número de ocorrências deve surgir encostada à margem direita.
+Cada linha tem 70 colunas.
+----------------
+#define MAX_TEXTO 10000
+//coloca numa string, a partir do ponteiro recebido, o conteúdo do ficheiro "texto.txt"
+//o espaço para que "ptexto" aponta tem de ter pelo menos MAX_TEXTO+1 bytes
+//devolve true se a leitura correu bem
+//devolve false se o ficheiro não existe, ou é grande demais (tem mais de MAX_TEXTO bytes)
+
+bool ler_texto(char *ptexto) {
+    FILE *fich1;
+    int i, c;
+    fich1 = fopen("texto.txt", "r");
+    if (fich1 == NULL) {
+        // Ficheiro texto.txt não existe
+        return false;
+    }
+    i = 0;
+    while (i < (MAX_TEXTO) && (c = fgetc(fich1)) != EOF) {
+        ptexto[i] = (char) c;
+        // detetar e eliminar o UTF BOM
+        if (i == 2 && ptexto[0] == (char)0xEF && ptexto[1] == (char) 0xBB && ptexto[2] == (char) 0xBF)
+            i = 0;
+        else
+            i++;
+    }
+    ptexto[i] = 0;
+    i++;
+    fclose(fich1);
+    if (i <= MAX_TEXTO)
+        return true;
+    else
+        // limite de bytes ultrapassado
+        return false;
+}
