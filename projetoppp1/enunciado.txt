@@ -1,0 +1,23 @@
+Primeiro trabalho de Princípios de Programação Procedimental
+                Ano letivo 2020/2021
+
+Os trabalhos são individuais. O programa entregue por cada aluno tem de ser da sua estrita autoria. Ninguém pode apresentar como seu trabalho que não tenha sido feito por si. Não há qualquer tolerância para a fraude.
+O enunciado fornecido não é necessariamente completo; o comportamento do programa nas situações não previstas no enunciado deve ser escolhido por cada estudante, de entre as várias hipóteses razoáveis. As escolhas feitas devem ser referidas explicitamente: não é aceitável ter de ir ver qual o comportamento do programa nesses casos para saber qual a escolha feita. No cabeçalho do programa principal devem estar listadas as escolhas feitas.
+O CLion, com a opção add_compile_options(-Wall -Wextra), não deve gerar qualquer aviso sobre o código fonte, exceto os que não possam ser resolvidos com a matéria lecionada até ao final da semana 4. Para fazer esta verificação o CLion deve ter o clang-tidy ativado na configuração standard, ou o clang-tidy deve ser executado na linha de comandos "clang-tidy ficheiro.c" (ficheiro.c é o ficheiro que está a ser verificado) tendo previamente colocado o ficheiro .clang-tidy nessa diretoria. O ficheiro .clang-tidy pode ser obtido de https://git.dei.uc.pt/snippets/31
+A função main deve estar contida num ficheiro fonte diferente das outras funções. No ficheiro fonte das outras funções só devem ter visibilidade para todo o programa as funções de que a função main precisa.
+
+Este programa gera uma forma geométrica numa tela (armazenada numa matriz bidimensional de inteiros)  e depois mostra o conteúdo dessa tela no ecrã.
+O tamanho da tela é pedido ao utilizador, podendo qualquer das dimensões, que não têm de ser iguais, variar entre 20 e 35.
+Os valores introduzidos pelo utilizador devem ser validados por uma função autónoma que devolve um bool: verdadeiro se os números são válidos, falso se algum inválido. Em caso de erro o utilizador deve poder introduzir novos valores.
+O programa desenha na tela uma figura geométrica marcando com um zero as posições da tela ocupadas por um espaço e com um valor diferente de zero as posições da tela ocupadas pela figura geométrica, sendo este desenho feito por uma função autónoma, cuja tarefa é apenas proceder a esse desenho.
+Esta função desenha a forma geométrica percorrendo toda a tela, marcando as posições em que uma expressão lógica seja verdadeira como estando ocupadas pela forma geométrica. Essa expressão lógica trabalha a partir das coordenadas da posição em causa. Por exemplo, num tela com as dimensões de M linhas e N colunas e sendo x a abcissa e y a ordenada, a fórmula (x != 0 && x != N-1 && y != 0 && y != M-1 && x == y) traça um segmento de reta a 45 graus da horizontal, cujos extremos ficam a uma posição de distância dos limites da tela.
+A figura geométrica é um triângulo isósceles com o vértice oposto à base para baixo.
+Esta figura geométrica deve ser definida apenas pelo seu contorno, portanto com o interior preenchido por espaços.
+O ponto da figura geométrica mais próximo da borda da tela deve a tocar essa borda. Isto é, não deve haver qualquer espaço entre esse ponto (ou pontos) e a borda mais próxima da tela.
+
+O programa mostra a tela no ecrã, colocando o ponto de coordenadas (0,0) no canto inferior esquerdo, chamando uma função com essa tarefa que:
+- Nas posições da tela com um espaço mostra o carater '~'
+- Nas posições da tela ocupadas pela figura geométrica mostra o carater '#'
+- Nas posições com um espaço mas adjacentes (horizontalmente) a uma posição ocupada pela figura geométrica, mostra o carater 'l'
+
+=========================

@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/conta/OneDrive/Ambiente de Trabalho/projetoppp1/auxproj1.c
+stdbool.h
+-
+stdio.h
+-
+auxproj1.h
+/cygdrive/c/Users/conta/OneDrive/Ambiente de Trabalho/projetoppp1/auxproj1.h
+
+/cygdrive/c/Users/conta/OneDrive/Ambiente de Trabalho/projetoppp1/auxproj1.h
+stdbool.h
+-
+stdio.h
+-
+

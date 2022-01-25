@@ -1,0 +1,1 @@
+/usr/bin/cc -g  -Wl,--enable-auto-import CMakeFiles/projetoppp1.dir/main.c.o CMakeFiles/projetoppp1.dir/auxproj1.c.o  -o projetoppp1.exe -Wl,--out-implib,libprojetoppp1.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
